@@ -28,15 +28,7 @@ partial class Program
             List<string> numbers = [];
             while ((line = sr.ReadLine()) != null)
             {
-                // Console.WriteLine(line);
-                int i = 1;
-                do 
-                {
-                    string part = line[..i];
-                    numbers = MyRegex().Matches(part).Cast<Match>().Select(m => m.Value.ToLower()).ToList();
-                    i++;
-                } while (numbers.Count == 0);
-                string firstDigit = numbers.First();
+                string firstDigit = MyRegex().Matches(line).Cast<Match>().Select(m => m.Value.ToLower()).ToList().First();
                 if (firstDigit.Length > 1)
                 {
                     foreach (var replacement in replacements)
@@ -44,8 +36,8 @@ partial class Program
                         firstDigit = firstDigit.Replace(replacement.Key, replacement.Value);
                     }
                 }
-                // Console.WriteLine(firstDigit);
-                i = 1;
+                
+                int i = 1;
                 do 
                 {
                     string part = line.Substring(line.Length-i,i);
@@ -60,11 +52,8 @@ partial class Program
                         lastDigit = lastDigit.Replace(replacement.Key, replacement.Value);
                     }
                 }
-                // Console.WriteLine(lastDigit);
                 var number = firstDigit + lastDigit;
-                // Console.WriteLine(number);
                 output += int.Parse(number);
-                // Console.WriteLine(output);
             }
             Console.WriteLine(output);
         }
