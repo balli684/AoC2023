@@ -1,11 +1,9 @@
 ﻿
-using System.Security.Cryptography.X509Certificates;
-
 class Program
 {
     static void Main()
     {
-        string filePath = "../../../ExampleInput.txt";
+        string filePath = "../../../Input.txt";
         string[] input = File.ReadAllLines(filePath);
 
         long[] temp = Array.ConvertAll(input[0].Split(':')[1].Trim().Split(' '), long.Parse);
@@ -22,20 +20,9 @@ class Program
             }
         }
 
-        // for (int i = 0; i < seeds.GetLength(0); i++)
-        // {
-        //     for (int j = 0; j < seeds.GetLength(1); j++)
-        //     {
-        //         Console.Write(seeds[i,j]);
-        //         Console.Write(" ");
-        //     }
-        //     Console.WriteLine();
-        // }
-
-
         List<List<long[]>> maps = [];
 
-        // long min = 9223372036854775807;
+        long max = 9223372036854775807;
 
         int i = 3;
         do
@@ -53,41 +40,49 @@ class Program
             i += 2;
         } while (i < input.Length);
 
-        var sortedLocations = maps[^1].OrderBy(arr => arr[0]).ToList();
         bool found = false;
-        foreach (var locationLine in sortedLocations)
+        long output = 0;
+        
+        long locationCounter = 0;
+        while (!found && locationCounter < max)
         {
-            long location = locationLine[0];
-            Console.WriteLine("Start Location {0}",location);
-            while (!found && location < locationLine[0] + locationLine[2])
+            var seed = locationCounter;
+            int mapCounter = 1;
+            while (mapCounter <= maps.Count)
             {
-                int mapCounter = 2;
-                while (mapCounter < maps.Count)
+                int rowCounter = 0;
+                
+                while (rowCounter < maps[^mapCounter].Count)
                 {
-                    int rowCounter = 0;
-                    
-                    while (rowCounter < maps[^mapCounter].Count)
+                    if (seed >= maps[^mapCounter][rowCounter][0] && seed < maps[^mapCounter][rowCounter][0] + maps[^mapCounter][rowCounter][2])
                     {
-                        if (location >= maps[^mapCounter][rowCounter][0] && location < maps[^mapCounter][rowCounter][0] + maps[^mapCounter][rowCounter][2])
-                        {
-                            location = location + maps[^mapCounter][rowCounter][1] - maps[^mapCounter][rowCounter][0];
-                            rowCounter = maps[^mapCounter].Count;
-                            
-                        }
-                        else
-                        {
-                            rowCounter++;
-                        }
+                        seed = seed + maps[^mapCounter][rowCounter][1] - maps[^mapCounter][rowCounter][0];
+                        rowCounter = maps[^mapCounter].Count;
                     }
-                    mapCounter++;
-                    Console.WriteLine("Mapnr {0}, Location {1}",maps.Count - mapCounter,location);
+                    else
+                    {
+                        rowCounter++;
+                    }
+                }
+                
+                mapCounter++;
+                
+            }
+            int x = 0;
+            while (!found && x < seeds.GetLength(0))
+                {
+                    if (seed >= seeds[x,0] && seed < seeds[x,0] + seeds[x,1])
+                    {
+                        found = true;
+                        output = locationCounter;
+                    }
+                    x++;
                 }
 
-
-                location++;
-            }
+            locationCounter++;
         }
         
+        Console.WriteLine(output);
         
 
 
