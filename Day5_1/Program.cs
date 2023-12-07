@@ -39,7 +39,7 @@ class Program
                 
                 while (rowCounter < maps[mapCounter].Count)
                 {
-                    if (location >= maps[mapCounter][rowCounter][1] && location <= maps[mapCounter][rowCounter][1] + maps[mapCounter][rowCounter][2])
+                    if (location >= maps[mapCounter][rowCounter][1] && location < maps[mapCounter][rowCounter][1] + maps[mapCounter][rowCounter][2])
                     {
                         location = location + maps[mapCounter][rowCounter][0] - maps[mapCounter][rowCounter][1];
                         rowCounter = maps[mapCounter].Count;
