@@ -1,6 +1,4 @@
 ﻿
-using System.Security.Cryptography.X509Certificates;
-
 class Program
 {
     static void Main()
@@ -32,9 +30,6 @@ class Program
                 currentStep = 0;
             }
         }
-
-        
         Console.WriteLine(stepCount);
-
     }
 }
