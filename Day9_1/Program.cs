@@ -11,7 +11,6 @@ class Program
 
         foreach (var line in input)
         {
-            // Console.WriteLine(line);
             List<List<int>> x = [];
             List<int> ints = line
                         .Split(" ")
@@ -22,7 +21,6 @@ class Program
             
             x.Add(ints);
 
-            // while(Enumerable.Sum(x[^1]) != 0)
             while(x[^1].Any(o => o != 0))
             {
                 List<int> y = [];
@@ -30,7 +28,6 @@ class Program
 
                 while (i < x[^1].Count - 1)
                 {
-                    // y.Add(Math.Abs(x[^1][i] - x[^1][i+1]));
                     y.Add(x[^1][i+1] - x[^1][i]);
                     i++;
                 }
@@ -39,25 +36,12 @@ class Program
 
             x.RemoveAll(s => s == null);
 
-            // foreach(var a in x)
-            // {
-            //     foreach(var b in a)
-            //     {
-            //         Console.Write("{0} ",b);
-            //     }
-            //     Console.WriteLine();
-                
-            // }
-            // Console.ReadLine();
-
             foreach(var z in x)
             {
                 if (z.Count > 0)
                 {
                     output += z[^1];
                 }
-                // Console.WriteLine(z[^1]);
-                // Console.WriteLine(output);
             }
 
         }
