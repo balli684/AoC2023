@@ -21,9 +21,9 @@ class Program
                         .ToList();
             
             x.Add(ints);
-            
 
-            while(Enumerable.Sum(x[^1]) != 0)
+            // while(Enumerable.Sum(x[^1]) != 0)
+            while(x[^1].Any(o => o != 0))
             {
                 List<int> y = [];
                 int i = 0;
@@ -39,16 +39,16 @@ class Program
 
             x.RemoveAll(s => s == null);
 
-            foreach(var a in x)
-            {
-                foreach(var b in a)
-                {
-                    Console.Write("{0} ",b);
-                }
-                Console.WriteLine();
+            // foreach(var a in x)
+            // {
+            //     foreach(var b in a)
+            //     {
+            //         Console.Write("{0} ",b);
+            //     }
+            //     Console.WriteLine();
                 
-            }
-            Console.ReadLine();
+            // }
+            // Console.ReadLine();
 
             foreach(var z in x)
             {
